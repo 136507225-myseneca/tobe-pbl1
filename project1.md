@@ -70,7 +70,6 @@ Let us move on and configure our EC2 machine to serve a Web server
   
 <img width="1787" alt="Screenshot 2022-04-04 at 23 41 21" src="https://user-images.githubusercontent.com/33035619/162734308-1868bb11-ed1b-4a9d-98f7-9262afab717b.png">
   
-  
 ## STEP 1 — INSTALLING APACHE AND UPDATING THE FIREWALL
   
 What exactly is Apache?
@@ -127,7 +126,6 @@ If you see following page, then your web server is now correctly installed and a
   ### Screen Shot of the server running when tested
   
 <img width="1793" alt="Screenshot 2022-04-05 at 00 00 25" src="https://user-images.githubusercontent.com/33035619/162732658-cae6d090-06f6-4185-9bec-46e9edb00065.png">
-  
   
   ## STEP 2 — INSTALLING MYSQL
 Now that you have a web server up and running, you need to install a Database Management System (DBMS) to be able to store and manage data for your site in a relational database. MySQL is a popular relational database management system used within PHP environments, so we will use it in our project.
@@ -239,7 +237,8 @@ Then, create and open a new configuration file in Apache’s sites-available dir
 sudo vi /etc/apache2/sites-available/projectlamp.conf
 This will create a new blank file. Paste in the following bare-bones configuration by hitting on i on the keyboard to enter the insert mode, and paste the text:
 
-<VirtualHost *:80>
+```javascript 
+  <VirtualHost *:80>
     ServerName projectlamp
     ServerAlias www.projectlamp 
     ServerAdmin webmaster@localhost
@@ -247,6 +246,7 @@ This will create a new blank file. Paste in the following bare-bones configurati
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+  ```
 To save and close the file, simply follow the steps below:
 
 Hit the esc button on the keyboard
@@ -291,12 +291,14 @@ With the default DirectoryIndex settings on Apache, a file named index.html will
 In case you want to change this behavior, you’ll need to edit the /etc/apache2/mods-enabled/dir.conf file and change the order in which the index.php file is listed within the DirectoryIndex directive:
 
 sudo vim /etc/apache2/mods-enabled/dir.conf
+  ```javascript 
 <IfModule mod_dir.c>
         #Change this:
         #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
         #To this:
         DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
+  ```
 After saving and closing the file, you will need to reload Apache so the changes take effect:
 
 sudo systemctl reload apache2
@@ -309,13 +311,15 @@ Create a new file named index.php inside your custom web root folder:
 vim /var/www/projectlamp/index.php
 This will open a blank file. Add the following text, which is valid PHP code, inside the file:
 
-<?php
+```javascript 
+  <?php
 phpinfo();
+```
 When you are finished, save and close the file, refresh the page and you will see a page similar to this:
 
-###Screenshot of the final app hosted on aws
+### Screenshot of the final app hosted on aws
+<img width="1794" alt="Screenshot 2022-04-05 at 01 22 19" src="https://user-images.githubusercontent.com/33035619/162735328-05fb1d7a-dee4-45fb-9b0c-9881fc51849e.png">
 
-<img width="1787" alt="Screenshot 2022-04-04 at 23 41 21" src="https://user-images.githubusercontent.com/33035619/162734308-1868bb11-ed1b-4a9d-98f7-9262afab717b.png">
 
 
 

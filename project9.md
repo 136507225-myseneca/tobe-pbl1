@@ -103,12 +103,12 @@ ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 
     
 ## CONFIGURE JENKINS TO COPY FILES TO NFS SERVER VIA SSH
-Step 3 – Configure Jenkins to copy files to NFS server via SSH
+- Step 3 – Configure Jenkins to copy files to NFS server via SSH
 Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
 
 Jenkins is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called "Publish Over SSH".
 
-Install "Publish Over SSH" plugin.
+- Install "Publish Over SSH" plugin.
 On main dashboard select "Manage Jenkins" and choose "Manage Plugins" menu item.
 
 On "Available" tab search for "Publish Over SSH" plugin and install it
@@ -146,7 +146,25 @@ SSH: Transferred 25 file(s)
 Finished: SUCCESS
 To make sure that the files in /mnt/apps have been udated – connect via SSH/Putty to your NFS server and check README.MD file
 
+     ```javascript 
 cat /mnt/apps/README.md
+    ```
 If you see the changes you had previously made in your GitHub – the job works as expected.
 
 Congratulations!
+ # Screenshorts
+
+<img width="884" alt="Screenshot 2022-04-30 at 15 28 23" src="https://user-images.githubusercontent.com/33035619/166243913-a77e34a9-06e0-499a-9ff2-055fca225e41.png">
+<img width="1800" alt="Screenshot 2022-04-30 at 15 47 38" src="https://user-images.githubusercontent.com/33035619/166243919-996263d6-998c-407a-9eef-5ab267608e55.png">
+<img width="1800" alt="Screenshot 2022-04-30 at 15 57 32" src="https://user-images.githubusercontent.com/33035619/166243927-c4c55d48-4387-4d02-af78-9dd232afcf07.png">
+<img width="1800" alt="Screenshot 2022-04-30 at 16 53 56" src="https://user-images.githubusercontent.com/33035619/166243944-4b2669ca-65a0-413e-89e7-ec8a5afb95f2.png">
+<img width="1800" alt="Screenshot 2022-04-30 at 19 12 36" src="https://user-images.githubusercontent.com/33035619/166243948-43eafc8e-5e89-415c-8efe-00bc237863b8.png">
+ <img width="1800" alt="Screenshot 2022-05-02 at 03 52 51" src="https://user-images.githubusercontent.com/33035619/166244126-55d88724-31ce-4021-a6e8-104804563754.png">
+<img width="1800" alt="Screenshot 2022-05-01 at 19 17 49" src="https://user-images.githubusercontent.com/33035619/166244162-592f3c88-5de5-4854-9d68-c44f7f399ef5.png">
+<img width="1800" alt="Screenshot 2022-05-01 at 19 25 00" src="https://user-images.githubusercontent.com/33035619/166244164-22a8057c-55cd-412a-bc09-05f93456316e.png">
+<img width="1800" alt="Screenshot 2022-05-01 at 19 31 22" src="https://user-images.githubusercontent.com/33035619/166244167-f022cbfa-b308-4d09-9820-d0debedd3b6f.png">
+
+
+  
+
+

@@ -23,7 +23,10 @@ Create a new Freestyle project ansible in Jenkins and point it to your ‘ansibl
 Configure Webhook in GitHub and set webhook to trigger ansible build.
 Configure a Post-build job to save all (**) files, like you did it in Project 9.
 Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
+
+```javascript
 ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
+```
 Note: Trigger Jenkins project execution only for /main (master) branch.
 
 Now your setup will look like this:
@@ -41,6 +44,9 @@ Clone down your ansible-config-mgt repo to your Jenkins-Ansible instance
 
 git clone <ansible-config-mgt repo link>
   
+  
+
+
   
   
 ## INSTALL AND CONFIGURE JENKINS SERVER
@@ -92,6 +98,8 @@ Once plugins installation is done – create an admin user and you will get your
 
 The installation is completed!
 
+    ## ScreenShots 
+  <img width="895" alt="Screenshot 2022-05-12 at 12 32 01" src="https://user-images.githubusercontent.com/33035619/168175732-348e3d39-038a-4d3f-ba37-5aa7edb7eaee.png">
 
 
 - ### Step 2 – Configure Jenkins to retrieve source codes from GitHub using Webhooks
@@ -141,22 +149,28 @@ You have now configured an automated Jenkins job that receives files from GitHub
 
 By default, the artifacts are stored on Jenkins server locally
   
-     ```javascript 
+ ```javascript 
 ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
-  ```
+```
   
-  
+    ## ScreenShots 
+<img width="888" alt="Screenshot 2022-05-12 at 17 15 15" src="https://user-images.githubusercontent.com/33035619/168175932-570f7346-4cf9-4991-84a5-67c53b4e9677.png">
+<img width="1800" alt="Screenshot 2022-05-12 at 17 17 29" src="https://user-images.githubusercontent.com/33035619/168175942-0793c72c-28f6-4aa7-bdf2-2afb7d6726e4.png">
+<img width="1800" alt="Screenshot 2022-05-12 at 17 17 40" src="https://user-images.githubusercontent.com/33035619/168175948-1a6aed0e-de87-4313-9cb3-17168c002adc.png">
+
+
   
   
 # CREATE A COMMON PLAYBOOK
-- ## Step 5 – Create a Common Playbook
+  
+## Step 5 Create a Common Playbook
 It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
 
 In common.yml playbook you will write configuration for repeatable, re-usable, and multi-machine tasks that is common to systems within the infrastructure.
 
 Update your playbooks/common.yml file with following code:
   
-     ```javascript 
+```javascript 
 ---
 - name: update web, nfs and db servers
   hosts: webservers, nfs, db
@@ -184,7 +198,7 @@ Update your playbooks/common.yml file with following code:
         name: wireshark
         state: latest
   
-  ```
+ ```
 Examine the code above and try to make sense out of it. This playbook is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on your RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
 
 Feel free to update this playbook with following tasks:
@@ -195,7 +209,17 @@ Run some shell script
 …
 For a better understanding of Ansible playbooks – watch this video from RedHat and read this article.
 
-- ## Step 6 – Update GIT with the latest code
+  ## ScreenShots 
+  <img width="1800" alt="Screenshot 2022-05-12 at 17 03 28" src="https://user-images.githubusercontent.com/33035619/168176073-ec400722-b0cb-4f9b-8df5-157f232bea05.png">
+<img width="888" alt="Screenshot 2022-05-12 at 17 07 25" src="https://user-images.githubusercontent.com/33035619/168176119-0745b958-e7c3-4202-a9a2-4e682fdb709f.png">
+
+
+  
+  
+  
+  
+  
+## Step 6  Update GIT with the latest code
 Now all of your directories and files live on your machine and you need to push changes made locally to GitHub.
 
 In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes – it is also called "Four eyes principle".
@@ -205,15 +229,25 @@ Now you have a separate branch, you will need to know how to raise a Pull Reques
 Commit your code into GitHub:
 
 use git commands to add, commit and push your branch to GitHub
-  ``javascript 
+  
+```javascript 
 git status
 
 git add <selected files>
 
 git commit -m "commit message"
-  ```
+```
   
 Create a Pull request (PR)
+  
+  
+  
+  ## Screenshots
+  <img width="884" alt="Screenshot 2022-05-12 at 17 14 56" src="https://user-images.githubusercontent.com/33035619/168176228-a6d0d84e-76bf-43ed-9fbf-09052b4f7aa1.png">
+<img width="888" alt="Screenshot 2022-05-12 at 17 15 15" src="https://user-images.githubusercontent.com/33035619/168176241-26fc5666-a67a-485e-86aa-79cca3e2fb3b.png">
+<img width="1800" alt="Screenshot 2022-05-12 at 17 17 29" src="https://user-images.githubusercontent.com/33035619/168176248-627b59b2-3470-4c64-bcf5-ffda796ecb47.png">
+
+
 
 Wear a hat of another developer for a second, and act as a reviewer.
 
@@ -225,11 +259,13 @@ Once your code changes appear in master branch – Jenkins will do its job and s
 
 
 ## RUN FIRST ANSIBLE TEST
-- #Step 7 – Run first Ansible test
+### Step 7 Run first Ansible test
 Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
 
+ ```javascript 
 cd ansible-config-mgt
 ansible-playbook -i inventory/dev.yml playbooks/common.yml
+ ```
 You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version
 
 
@@ -237,6 +273,18 @@ You can go to each of the servers and check if wireshark has been installed by r
 Your updated with Ansible architecture now looks like this:
 
 
+  ## Screenshots
+  
+<img width="559" alt="Screenshot 2022-05-12 at 16 27 19" src="https://user-images.githubusercontent.com/33035619/168176516-64554555-213b-4000-8f67-3c5ea5456447.png">
+
+<img width="559" alt="Screenshot 2022-05-12 at 16 27 19" src="https://user-images.githubusercontent.com/33035619/168176388-66fde20b-a0c4-4534-ab55-b94384a96998.png">
+ Screenshot 2022-05-12 at 22.54.38.png…]()
+<img width="1002" alt="Screenshot 2022-05-12 at 22 54 48" src="https://user-images.githubusercontent.com/33035619/168176340-593ea102-cac4-4035-85b5-1fdcaf69e0c8.png">
+<img width="820" alt="Screenshot 2022-05-12 at 22 58 15" src="https://user-images.githubusercontent.com/33035619/168176343-15570958-0351-4494-b4fd-1e05324ce9d1.png">
+<img width="996" alt="Screenshot 2022-05-12 at 20 41 12" src="https://user-images.githubusercontent.com/33035619/168176354-539f7e50-8b6b-4cc6-9aeb-c9d079c0fa6e.png">
+
+
+  
 
 Optional step – Repeat once again
 Update your ansible playbook with some new Ansible tasks and go through the full checkout -> change codes -> commit -> PR -> merge -> build -> ansible-playbook cycle again to see how easily you can manage a servers fleet of any size with just one command!

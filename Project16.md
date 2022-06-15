@@ -99,7 +99,8 @@
   Type yes when prompted
  <img width="979" alt="Screenshot 2022-06-14 at 17 44 30" src="https://user-images.githubusercontent.com/33035619/173632058-3a3bcb1a-526d-4dae-83ab-bd538168f60f.png">
 ## Step 2: Fixing limitations by code refactoring
-### Step 2.1: Fixing hard coded values
+
+## Step 2.1: Fixing hard coded values
 - Adding the following block to the main.tf file
   ```
     variable "region" {
@@ -139,7 +140,7 @@
     enable_classiclink_dns_support = var.enable_classiclink
 
     }
-##3 Step 2.2: Fixing multiple resource blocks
+### Step 2.2: Fixing multiple resource blocks
 - Use Terraform **data sources** to fetch list of availability zones from AWS
   ```
   # Get list of availability zones
